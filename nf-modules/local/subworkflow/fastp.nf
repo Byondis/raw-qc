@@ -36,7 +36,7 @@ workflow fastpFlow {
   emit:
   fastq = chTrimReads
   logs = fastp.out.logs
-  mqc = trimmingSummary.out.mqc
+  mqc = trimmingSummaryFastp.out.mqc
   versions = chVersions
 }
 
