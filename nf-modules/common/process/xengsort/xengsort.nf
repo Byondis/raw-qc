@@ -4,8 +4,8 @@
 
 process xengsort {
   tag "${meta.id}"
-  label 'medCpu'
-  label 'highMem'
+  label 'extraCpu'
+  label 'extraMem'
   label 'xengsort'
 
   input:

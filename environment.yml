@@ -11,15 +11,15 @@ dependencies:
   - bioconda::multiqc=1.11=pyhdfd78af_0
   - bioconda::samtools=1.12=h9aed4be_1
   - bioconda::bowtie2=2.4.2=py37h8270d21_1
-  - conda-forge::tbb=2020.2=hc9558a2_0
+  - conda-forge::tbb
   - bioconda::trim-galore=0.6.7=hdfd78af_0
   - bioconda::fastqc=0.11.9=hdfd78af_1
   - bioconda::fastq-screen=0.15.2=pl5321hdfd78af_0
   - bioconda::fastp=0.23.2=h79da9fb_0
-  - conda-forge::numpy=1.21.6=py37h976b520_0
-  - conda-forge::numba=0.53.1=py37hb11d6e1_1
+  - conda-forge::numpy
+  - conda-forge::numba
   - h5py=3.6.0=py37ha0f2276_0
-  - conda-forge::pytest=7.1.2=py37h89c1867_0
+  - conda-forge::pytest
   - bioconda::sra-tools=2.11.0=pl5321ha49a11a_3
   - pip:
     - biopython==1.79

@@ -108,6 +108,7 @@ summary = [
   'Profile' : workflow.profile,
   'OutDir' : params.outDir,
   'WorkDir': workflow.workDir,
+  'XengsortIndex': params.xengsortIndex,
   'CommandLine': workflow.commandLine
 ].findAll{ it.value != null }
 
@@ -207,12 +208,14 @@ workflow {
     versionsCh = versionsCh.mix(fastqcTrim.out.versions)
 
     //SUBWORKFLOW: fastqScreen
-    fastqScreenFlow(
-      trimReadsCh,
-      fastqScreenGenomeCh
-    )
-    versionsCh = versionsCh.mix(fastqScreenFlow.out.versions)
-    
+    fastqScreenOut = Channel.empty()
+    if ( !params.skipFastqScreen ) {
+      fastqScreenOut = fastqScreenFlow(
+        trimReadsCh,
+        fastqScreenGenomeCh
+      )
+      versionsCh = versionsCh.mix(fastqScreenFlow.out.versions)
+    }
     // PROCESS: xengsort
     xengsort(
       trimReadsCh,
@@ -253,7 +256,7 @@ workflow {
 	generalMetrics.out.csv.collect().ifEmpty([]),
 	fastqcTrim.out.results.collect().ifEmpty([]),
         xengsort.out.logs.collect().ifEmpty([]),
-        fastqScreenFlow.out.mqc.collect().ifEmpty([]),
+        fastqScreenOut.ifEmpty([]),
 	getSoftwareVersions.out.versionsYaml.collect().ifEmpty([]),
 	workflowSummaryCh.collectFile(name: "workflow_summary_mqc.yaml"),
         warnCh.collect().ifEmpty([])
